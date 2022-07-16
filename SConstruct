@@ -6,7 +6,7 @@
 # application, then calls the sconscripts for libfluxus and
 # the fluxus Racket modules
 
-import os, os.path, sys, commands, subprocess
+import os, os.path, sys, subprocess
 
 MajorVersion = "0"
 MinorVersion = "18"
@@ -219,9 +219,9 @@ if env['PLATFORM'] == 'posix':
 # Make sure we have these libraries availible
 
 if not GetOption('clean'):
-        print '--------------------------------------------------------'
-        print 'Fluxus: Configuring Build Environment'
-        print '--------------------------------------------------------'
+        print( '--------------------------------------------------------')
+        print ('Fluxus: Configuring Build Environment')
+        print ('--------------------------------------------------------')
         # detect ode precision
         if not GetOption('clean'):
           try:
@@ -230,27 +230,27 @@ if not GetOption('clean'):
             if isinstance(ode_str[0], str):
               env.MergeFlags(ode_str[0])
           except:
-            print 'WARNING: unable to run ode-config, cannot detect ODE precision'
+            print ('WARNING: unable to run ode-config, cannot detect ODE precision')
 
         conf = Configure(env)
 
         # check Racket and OpenAL frameworks on osx
         if env['PLATFORM'] == 'darwin':
                 if not conf.CheckHeader('scheme.h'):
-                        print "ERROR: 'racket3m' must be installed!"
+                        print( "ERROR: 'racket3m' must be installed!")
                         Exit(1)
                 if racket_framework:
                   LibList = filter(lambda x: x[0] != 'racket3m', LibList)
                 # OpenAL should be installed everywhere
                 if not conf.CheckHeader('OpenAL/al.h'):
-                        print "ERROR: 'OpenAL' must be installed!"
+                        print ("ERROR: 'OpenAL' must be installed!")
                         Exit(1)
 
         # all libraries are required, and some of them require each other,
         # hence the order is important, and autoadd=1
         for (lib,headers) in LibList:
                 if not conf.CheckLibWithHeader(lib, headers, 'C', autoadd = 1):
-                        print "ERROR: '%s' must be installed!" % (lib)
+                        print ("ERROR: '%s' must be installed!" % (lib))
                         Exit(1)
 
         if not conf.CheckFunc("dInitODE2"):
@@ -319,7 +319,7 @@ if not GetOption('clean'):
 		raco_status = subprocess.call(['raco', 'ctool', '--c-mods', 'src/base.c', '++lib', 'racket/base'])
 
 	if raco_status != 0:
-		print "ERROR: Failed to run command 'raco'"
+		print ("ERROR: Failed to run command 'raco'")
 		Exit(1)
 
 
@@ -361,8 +361,8 @@ if not GetOption('clean') and static_modules:
 
 		app_env['LIBS'].remove("pthread")
 		app_env['LIBS'].remove("dl")
-                app_env['LIBS'].remove("ode")
-                app_env['LIBS'].remove("sndfile")
+		app_env['LIBS'].remove("ode")
+		app_env['LIBS'].remove("sndfile")
 
 		# now go through the rest of the libs, removing them from
 		# the environment at the same time
