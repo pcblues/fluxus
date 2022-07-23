@@ -97,7 +97,7 @@ void MovingHardClip(Sample &buf, const Sample &level)
 	}
 }
 
-EVP_CIPHER_CTX e_ctx;
+EVP_CIPHER_CTX *e_ctx;
 
 void CryptoInit()
 {
@@ -112,9 +112,14 @@ void CryptoInit()
                    key,
                    iv);
     cerr<<1<<endl;
-    EVP_CIPHER_CTX_init(&e_ctx);
+	//EVP_CIPHER_CTX *ctx = EVP_CIPHER_CTX_new();
+	//EVP_CIPHER_CTX_init(ctx);
+	//do sth here
+	//...
+	//EVP_CIPHER_CTX_free(ctx);
+    e_ctx = EVP_CIPHER_CTX_new();
     cerr<<2<<endl;
-    EVP_EncryptInit_ex(&e_ctx, EVP_aes_256_ecb(), NULL, key, iv);
+    EVP_EncryptInit_ex(e_ctx, EVP_aes_256_ecb(), NULL, key, iv);
     cerr<<"cryptoinit done"<<endl;
 }
 
@@ -131,10 +136,10 @@ void CryptoDistort(Sample &buf)
     }
 
     int c_len=byteslen+AES_BLOCK_SIZE;
-    EVP_EncryptUpdate(&e_ctx,(unsigned char*)enc_dato, &c_len,
+    EVP_EncryptUpdate(e_ctx,(unsigned char*)enc_dato, &c_len,
                              (unsigned char*)enc_dati, byteslen);
     int f_len = 0;
-    EVP_EncryptFinal_ex(&e_ctx,(unsigned char*)enc_dato+c_len, &f_len);
+    EVP_EncryptFinal_ex(e_ctx,(unsigned char*)enc_dato+c_len, &f_len);
 
     for (unsigned int i=0; i<buf.GetLength(); i++)
     {

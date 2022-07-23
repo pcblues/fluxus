@@ -15,3 +15,5 @@ lib*.a
 helpmap.scm
 moc_*.cc
 *.pyc
+.vscode
+*.swp

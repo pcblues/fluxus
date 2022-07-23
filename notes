@@ -3,3 +3,9 @@ Notes for Fluxus
 sudo install packages in reverse order
 clone from pcblues/fluxus
 
+Configuring Racket to create racket3m library
+
+../configure --enable-bcdefault --enable-bconly --enable-shared --prefix=/usr/local
+make
+sudo make install
+
