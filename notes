@@ -5,7 +5,16 @@ clone from pcblues/fluxus
 
 Configuring Racket to create racket3m library
 
-../configure --enable-bcdefault --enable-bconly --enable-shared --prefix=/usr/local
-make
-sudo make install
+See installracket.sh
+
+Add LIBDIR to '/etc/ld.so.conf'
+Restart linux
+
+???
+raco pkg install compiler-lib
+raco pkg install cext-lib
+raco pkg install mzscheme
+raco pkg install whereis
+
+Check paths in SConstruct
 

@@ -39,7 +39,7 @@ elif sys.platform == 'win32':
 	RacketCollects = ARGUMENTS.get('RacketCollects', RacketLib + "/racket/collects/")
 else:
 	Prefix = ARGUMENTS.get('Prefix','/usr/local')
-	RacketPrefix = ARGUMENTS.get('RacketPrefix','/usr/local')
+	RacketPrefix = ARGUMENTS.get('RacketPrefix','/home/mo/installs')
 	RacketInclude = ARGUMENTS.get('RacketInclude', RacketPrefix + "/include/racket")
 	RacketLib = ARGUMENTS.get('RacketLib', RacketPrefix + "/lib/racket")
 # dave changed for racket package which puts collects in /usr/share
@@ -180,6 +180,12 @@ else:
 # First member of each list is a library, second - a header or headers list
 # to be passed to the CheckLibWithHeader(...) at configure time.
 # We may add extra libraries later on per platform basis
+print("RacketPrefix: ",RacketPrefix)
+print("RacketInclude: ",RacketInclude)
+print("RacketLib: ",RacketLib)
+
+
+
 LibList = [["m", "math.h"],
 			["pthread", "pthread.h"],
 			["dl", "stdio.h"],
