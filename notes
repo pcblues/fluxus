@@ -10,11 +10,7 @@ See installracket.sh
 Add LIBDIR to '/etc/ld.so.conf'
 Restart linux
 
-???
-raco pkg install compiler-lib
 raco pkg install cext-lib
-raco pkg install mzscheme
-raco pkg install whereis
 
 Check paths in SConstruct
 
